@@ -1,0 +1,17 @@
+@mixin respond-to($media) {
+  @if $media == handhelds {
+    @media only screen and (min-device-width : 320px) and (max-device-width: 480px){@content;}
+  }
+  @else if $media == wide-handhelds {
+    @media screen and (min-device-width: 481px) and (max-device-width: 639px) {@content;}
+  }
+  @else if $media == wide-handhelds-2 {
+    @media screen and (min-device-width: 640px) and (max-device-width: 767px){@content;}
+  }
+  @else if $media == tablets {
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1280px){@content;}
+  }
+  @else if $media == laptops_plus {
+    @media only screen and (min-device-width: 1281px){@content;}
+  }
+}

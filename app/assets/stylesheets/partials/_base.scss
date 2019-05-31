@@ -1,0 +1,123 @@
+// Font weights
+$light: 100;
+$regular: 400;
+$medium: 500;
+$bold: 600;
+
+// Base Font
+$base-font-family: sans-serif;
+$base-font-weight: $regular;
+$base-font-size: 13px;
+$base-line-height: 1.4;
+
+// Fixed Font
+$fixed-font-family: monospace;
+$fixed-font-size: 85%;
+$fixed-line-height: $base-line-height;
+
+// Headings
+$header-font-weight: $bold;
+$material-subtitle-font-size: 16/16 + rem;
+$material-subtitle2-font-size: 14/16 + rem;
+$material-body-font-size: 16/16 + rem;
+$material-body2-font-size: 14/16 + rem;
+$material-button-font-size: 14/16 + rem;
+$material-caption-font-size: 12/16 + rem;
+$material-overline-font-size: 10/16 + rem;
+
+$valencia:	      #d63f35;
+$bleached-cedar:  #211523;
+$asparagus:       #758d48;
+$christine:       #f37d10;
+$pomegranate: 	  #f44336;
+$background: #f0f1ee;
+$background_simple: #f0f1ee;
+
+$other-items: #eff8f3;
+$brand-color: #CC3B2E; /*#E34234;*/
+$text-color: #28292B;
+$text-color-on-dark: $background_simple;
+$yellow: #FF9F43;
+$color-other-elements: #1D2731;
+$grid-item-color: #131116;
+$link-primary: $valencia;
+
+// SIZES
+$header_size: 50px;
+$footer_size: 45px;
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: $background;
+  color:$text-color;
+  display: flex;
+  justify-content: center;
+}
+a {
+  color:$other-items;
+}
+
+h1 {
+  font-size: 96/16 + rem;
+  font-weight: $light;
+}
+h2 {
+  font-size: 60/16 + rem;
+  font-weight: $light;
+}
+h3 {
+  font-size: 48/16 + rem;
+  font-weight: $regular;
+}
+h4 {
+  font-size: 34/16 + rem;
+  font-weight: $regular;
+}
+h5 {
+  font-size: 24/16 + rem;
+  font-weight: $regular;
+}
+h6 {
+  font-size: 16/16 + rem;
+  font-weight: $medium;
+}
+#app {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  max-width: 1280px;
+  flex-flow: column;
+  position: relative;
+  width:100%;
+}
+#page-wrapper {
+  padding: $header_size 0 $footer_size;
+  flex-flow: column;
+  display: flex;
+  height: 100%;
+  background: rgba($background_simple, 0.7);
+  &.show {
+    display: flex;
+  }
+
+  @media only screen and (max-width: 1023px) {
+    width: 100%;
+    height: inherit;
+  }
+}
+.main-container {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-flow: column;
+}

@@ -23,6 +23,16 @@
       justify-content: center;
       margin: 0 0.5rem 0 2rem;
       color:$bleached-cedar;
+      & .list__items-favourites {
+        &.list__items-favourites--active a {
+            color: orangered;
+        }
+      }
+      & .list__items-watchlater {
+        &.list__items-watchlater--active a {
+          color: orangered;
+        }
+      }
       & a {
         color: inherit;
       }

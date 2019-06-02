@@ -1,5 +1,7 @@
 export const FETCHING = 'app/searchmovies/FETCHING';
 export const SEARCH = 'app/searchmovies/SEARCH';
+export const TOGGLE_FAVORITE = 'app/searchmovies/TOGGLE_FAVORITE';
+export const TOGGLE_WATCHLATER = 'app/searchmovies/TOGGLE_WATCHLATER';
 
 const initialState = {
     search_keywords: "",
@@ -26,6 +28,19 @@ export const selectCurrentPage = (state) => {
     return state.SearchMovies.page;
 };
 
+function updateObject(oldObject, newValues) {
+    return Object.assign({}, oldObject, newValues)
+}
+
+function updateItemInArray(array, itemId, callback) {
+    return array.map((item) => {
+        if (item.id !== itemId) {
+            return item;
+        }
+        return callback(item);
+    });
+}
+
 export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
         case FETCHING:
@@ -42,6 +57,18 @@ export default function reducer(state = initialState, action = {}) {
                 fetching: false,
                 error: { on : false, message: "" }
             });
+        case TOGGLE_FAVORITE:
+            const newFavoriteItems = updateItemInArray(state.movies, action.id, item => {
+                return updateObject(item, { favorite: !item.favorite });
+            });
+
+            return updateObject(state, { movies: newFavoriteItems });
+        case TOGGLE_WATCHLATER:
+            const newWatchLaterItems = updateItemInArray(state.movies, action.id, item => {
+                return updateObject(item, { watchLater: !item.watchLater });
+            });
+
+            return updateObject(state, { movies: newWatchLaterItems });
         default:
             return state;
     }
@@ -86,5 +113,18 @@ export function search(keyword, results) {
         type: SEARCH,
         value: keyword,
         results: results,
+    }
+}
+
+export function toggleFavorite(id) {
+    return {
+        type: TOGGLE_FAVORITE,
+        id: id
+    }
+}
+export function toggleWatchLater(id) {
+    return {
+        type: TOGGLE_WATCHLATER,
+        id: id
     }
 }

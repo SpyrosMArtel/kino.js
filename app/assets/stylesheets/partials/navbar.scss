@@ -6,7 +6,6 @@
   background: $bleached-cedar;
 
   & .search {
-    margin-left:auto;
     &__form {
       position: relative;
       & .search__input {
@@ -17,15 +16,35 @@
         border-radius: 2px;
         background: whitesmoke;
         box-shadow: inset 0 0 7px 0 rgba(120, 120, 120, 0.5);
-        //min-width: 320px;
-        min-width: 268px;
-        padding: 8px 0 8px 40px;
+        min-width: 232px;
+        padding: 8px 0 8px 32px;
       }
       & .search__icon {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
         left: 5px;
+        font-size: 25px;
+      }
+    }
+    @include respond-to('tablets') {
+      margin-left:auto;
+      & .search__input {
+        padding: 8px 0 8px 32px;
+        min-width: 320px;
+      }
+      & .search__icon {
+        font-size: 28px;
+      }
+    }
+
+    @include respond-to('laptops_plus') {
+      margin-left:auto;
+      & .search__input {
+        padding: 8px 0 8px 32px;
+        min-width: 320px;
+      }
+      & .search__icon {
         font-size: 28px;
       }
     }

@@ -101,11 +101,12 @@ h6 {
   width:100%;
 }
 #page-wrapper {
-  padding: $header_size 0 $footer_size;
+  padding: 0;
   flex-flow: column;
   display: flex;
   height: 100%;
   background: rgba($background_simple, 0.7);
+  overflow: auto;
   &.show {
     display: flex;
   }

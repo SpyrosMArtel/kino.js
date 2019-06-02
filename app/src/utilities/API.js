@@ -7,8 +7,13 @@ class API {
         this.apiKey = '540700bd5f61016b697371b5145631b9';
     }
 
-    findMovie(keyword, config={}) {
-        return axios.get(`${this.url}/search/movie`, Object.assign({ params: {query:keyword, api_key: this.apiKey}, config }));
+    findMovie(keyword, page, config={}) {
+        return axios.get(`${this.url}/search/movie`, Object.assign(
+            { params: {
+                query:keyword,
+                api_key: this.apiKey,
+                page: page || 1
+            }, config }));
     }
 
     getVideos(id, config) {

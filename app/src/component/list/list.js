@@ -4,11 +4,7 @@ import HeartIcon from '@material-ui/icons/FavoriteOutlined';
 import WatchIcon from '@material-ui/icons/WatchLaterOutlined';
 import InfiniteScroll from 'react-infinite-scroller';
 import {removeFromWatchLater} from "../../modules/addToList";
-/*
-*                 secondary={
-                    item['overview'] ? ((item['overview'].length > maxLength) ? (item['overview'].substring(0,maxLength-3) + '...') : item['overview']) : null }
 
-* */
 const ListComponent = (
     {
         items,
@@ -17,6 +13,11 @@ const ListComponent = (
         hasMore,
         addToFavorites, addToWatchLater, removeFavorites, removeWatchLater
 }) => {
+    const hasFavoriteButton         = visibleButtons.some((str) => str === 'fav');
+    const hasWatchlaterButton       = visibleButtons.some((str) => str === 'watch');
+    const hasRemoveFavoriteButton   = visibleButtons.some((str) => str === 'df');
+    const hasRemoveWatchButton      = visibleButtons.some((str) => str === 'dw');
+
     let listItems = items.map((item, index) => {
         return(
             <div className="list__item" key={index}>
@@ -27,28 +28,22 @@ const ListComponent = (
                 </div>
                 <div className='list__item-text'>{item['title']}</div>
                 <div className='list__item-actions'>
-                    {visibleButtons.indexOf('f') !== -1 ?
+                    {hasFavoriteButton &&
                         <div
                             className={item.favorite ? 'list__items-favourites list__items-favourites--active' : 'list__items-favourites'}>
-                            <a href="#" onClick={ () => {
-                            item.favorite ? removeFavorites(item.id) : addToFavorites(item);
-                        }}><HeartIcon/></a></div> : null
-                    }
-                    {visibleButtons.indexOf('w') !== -1 ?
+                            <a href="#" onClick={ () => { item.favorite ? removeFavorites(item.id) : addToFavorites(item);
+                        }}><HeartIcon/></a></div>}
+                    {hasWatchlaterButton &&
                         <div
                             className={item.watchLater ? 'list__items-watchlater list__items-watchlater--active' : 'list__items-watchlater'}>
-                            <a href="#"  onClick={ () => {
-                            item.watchLater ? removeWatchLater(item.id) : addToWatchLater(item);
-                        }}><WatchIcon/></a></div> : null
-                    }
-                    {visibleButtons.indexOf('df') !== -1 ?
+                            <a href="#"  onClick={ () => { item.watchLater ? removeWatchLater(item.id) : addToWatchLater(item);
+                        }}><WatchIcon/></a></div>}
+                    {hasRemoveFavoriteButton &&
                         <div className='list__items-remove'><a href="#"  onClick={ () => {removeFavorites(item.id)}}>
-                            <DeleteIcon/></a></div> : null
-                    }
-                    {visibleButtons.indexOf('dw') !== -1 ?
+                            <DeleteIcon/></a></div>}
+                    {hasRemoveWatchButton &&
                         <div className='list__items-remove'><a href="#"  onClick={ () => {removeWatchLater(item.id)}}>
-                            <DeleteIcon/></a></div> : null
-                    }
+                            <DeleteIcon/></a></div>}
                 </div>
             </div>
         );

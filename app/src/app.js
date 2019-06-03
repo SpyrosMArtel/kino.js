@@ -1,9 +1,12 @@
-import { Provider } from 'react-redux';
-import configureStore from './modules';
-import MainContainer from './containers/main/main';
 import React from 'react';
 import { render } from 'react-dom';
+import HomeContainer from './containers/home/home';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import configureStore, { history } from './modules';
+
+const store = configureStore();
 
 const theme = createMuiTheme({
     typography: { useNextVariants: true,},
@@ -12,12 +15,12 @@ const theme = createMuiTheme({
     }
 });
 
-const store = configureStore();
-
 render(
     <Provider store={store}>
         <MuiThemeProvider theme={theme}>
-            <MainContainer />
+            <ConnectedRouter history={history}>
+                <HomeContainer />
+            </ConnectedRouter>
         </MuiThemeProvider>
     </Provider>,
     document.querySelector('#app')

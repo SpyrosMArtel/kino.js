@@ -101,12 +101,13 @@ h6 {
   width:100%;
 }
 #page-wrapper {
-  padding: 0;
   flex-flow: column;
   display: flex;
   height: 100%;
   background: rgba($background_simple, 0.7);
   overflow: auto;
+  width: 100%;
+  padding: 8px;
   &.show {
     display: flex;
   }
@@ -121,4 +122,9 @@ h6 {
   overflow: hidden;
   display: flex;
   flex-flow: column;
+}
+.home__empty {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 }

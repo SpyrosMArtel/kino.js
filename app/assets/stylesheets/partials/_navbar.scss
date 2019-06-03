@@ -6,14 +6,26 @@
   background: $bleached-cedar;
 
   & .search {
+    display: flex;
+    align-items: center;
+    color: whitesmoke;
+    &.favorites, &.watchlater {
+      margin: 0;
+    }
+    & .search__mobile {
+      display: block;
+    }
+    & .search__tabletplus {
+      display: none;
+    }
     &__form {
       position: relative;
       & .search__input {
         caret-color: red;
         color: $bleached-cedar;
-        height: 32px;
+        height: 28px;
         border: none;
-        border-radius: 2px;
+        border-radius: 8px;
         background: whitesmoke;
         box-shadow: inset 0 0 7px 0 rgba(120, 120, 120, 0.5);
         min-width: 232px;
@@ -29,23 +41,41 @@
     }
     @include respond-to('tablets') {
       margin-left:auto;
+      & .search__mobile {
+        display: none;
+      }
+      & .search__tabletplus {
+        display: block;
+      }
       & .search__input {
         padding: 8px 0 8px 32px;
         min-width: 320px;
       }
       & .search__icon {
         font-size: 28px;
+      }
+      & .navbar-menu {
+        flex: 0;
       }
     }
 
     @include respond-to('laptops_plus') {
       margin-left:auto;
+      & .search__mobile {
+        display: none;
+      }
+      & .search__tabletplus {
+        display: block;
+      }
       & .search__input {
         padding: 8px 0 8px 32px;
         min-width: 320px;
       }
       & .search__icon {
         font-size: 28px;
+      }
+      & .navbar-menu {
+        flex: 0;
       }
     }
   }
@@ -58,6 +88,20 @@
     flex-flow: row nowrap;
     align-items: stretch;
     color: whitesmoke;
+    &.favorites .navbar-menu__watchlater {
+      display: none;
+    }
+    &.favorites .navbar-menu__favorites {
+      flex: 0;
+      margin: 0 0 0 auto;
+    }
+    &.watchlater .navbar-menu__favorites {
+      display: none;
+    }
+    &.watchlater .navbar-menu__watchlater {
+      flex: 0;
+      margin: 0 0 0 auto;
+    }
     & .navbar-menu__favorites {
       //flex: 1;
       //align-self: center;
@@ -70,4 +114,15 @@
       align-self: center;
     }
   }
+  @include respond-to('tablets') {
+    & .navbar-menu {
+      flex:0;
+    }
+  }
+  @include respond-to('laptops_plus') {
+    & .navbar-menu {
+      flex:0;
+    }
+  }
+
 }

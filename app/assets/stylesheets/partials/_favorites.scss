@@ -2,6 +2,12 @@
   display: flex;
   flex-flow: column wrap;
   align-items: center;
+  @include respond-to("tablets") {
+    color: whitesmoke;
+  }
+  @include respond-to("laptops_plus") {
+    color: whitesmoke;
+  }
   & img {
     display: block;
     max-width: 480px;

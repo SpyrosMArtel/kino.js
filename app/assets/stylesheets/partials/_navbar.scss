@@ -20,6 +20,8 @@
     }
     &__form {
       position: relative;
+      color: $bleached-cedar;
+
       & .search__input {
         caret-color: red;
         color: $bleached-cedar;

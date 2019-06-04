@@ -2,6 +2,7 @@ export const FETCHING = 'app/searchmovies/FETCHING';
 export const SEARCH = 'app/searchmovies/SEARCH';
 export const TOGGLE_FAVORITE = 'app/searchmovies/TOGGLE_FAVORITE';
 export const TOGGLE_WATCHLATER = 'app/searchmovies/TOGGLE_WATCHLATER';
+export const SET_MOVIE_DETAILS = 'app/searchmovies/SET_MOVIE_DETAILS';
 
 const initialState = {
     search_keywords: "",
@@ -14,6 +15,7 @@ const initialState = {
         on: false,
         message: ""
     },
+    movieDetails: {},
 };
 
 export const selectAllMovies = (state) => {
@@ -26,6 +28,10 @@ export const selectTotalPages = (state) => {
 
 export const selectCurrentPage = (state) => {
     return state.SearchMovies.page;
+};
+
+export const selectMovieDetails = (state) => {
+    return state.SearchMovies.movieDetails;
 };
 
 function updateObject(oldObject, newValues) {
@@ -57,6 +63,9 @@ export default function reducer(state = initialState, action = {}) {
                 fetching: false,
                 error: { on : false, message: "" }
             });
+        case SET_MOVIE_DETAILS:
+            return updateObject(state, { movieDetails: action.movieDetails });
+
         case TOGGLE_FAVORITE:
             const newFavoriteItems = updateItemInArray(state.movies, action.id, item => {
                 return updateObject(item, { favorite: !item.favorite });
@@ -88,17 +97,53 @@ export function fetchMovies(keyword, page) {
             results.totalResults = response.data.total_results;
             dispatch(search(keyword, results));
         }).catch((err) => {
-            if (error.response) {
-                dispatch(error(err.response.data));
-            } else if (error.request) {
-                dispatch(error("The server is not responding... Please try again later."));
+            if (err.response) {
+                //dispatch(error(err.response.data));
+                console.log(error.response.data);
+            } else if (err.request) {
+                //dispatch(error("The server is not responding... Please try again later."));
                 console.log(error.request);
             } else {
-                dispatch(error("Something went wrong... Please try again later."));
+                //dispatch(error("Something went wrong... Please try again later."));
                 console.log('Error', error.message);
             }
         });
     }
+}
+
+export function getMovieDetails(id) {
+    return (dispatch, getState, rest_api) => new Promise((resolve, reject) => {
+        dispatch(fetching());
+        rest_api.getVideos(id).then((response) => {
+            let results = {};
+            results.id = response.data.id || undefined;
+            results.image = response.data.poster_path || undefined;
+            results.title = response.data.title || undefined;
+            results.status = response.data.status || undefined;
+            results.images = response.data.images || undefined;
+            results.videos = response.data.videos.results || undefined;
+            results.runtime = response.data.runtime || undefined;
+            results.homepage = response.data.homepage || undefined;
+            results.overview = response.data.overview || undefined;
+            results.releaseDate = response.data.release_date || undefined;
+            results.originalTitle = response.data.original_title || undefined;
+            results.originalLanguage = response.data.original_language || undefined;
+            results.voteAverage = response.data.vote_average || undefined;
+            dispatch(setMovieDetails(results));
+            resolve(results);
+        }).catch((err) => {
+            if (err.response) {
+                //dispatch(error(err.response.data));
+                reject(error.response.data);
+            } else if (err.request) {
+                //dispatch(error("The server is not responding... Please try again later."));
+                reject(error.request);
+            } else {
+                //dispatch(error("Something went wrong... Please try again later."));
+                reject(error.message);
+            }
+        });
+    });
 }
 
 export function fetching() {
@@ -116,12 +161,20 @@ export function search(keyword, results) {
     }
 }
 
+export function setMovieDetails(movieDetails) {
+    return {
+        type: SET_MOVIE_DETAILS,
+        movieDetails: movieDetails,
+    }
+}
+
 export function toggleFavorite(id) {
     return {
         type: TOGGLE_FAVORITE,
         id: id
     }
 }
+
 export function toggleWatchLater(id) {
     return {
         type: TOGGLE_WATCHLATER,

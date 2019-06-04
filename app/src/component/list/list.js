@@ -11,6 +11,7 @@ const ListComponent = (
         visibleButtons,
         loadMore,
         hasMore,
+        showMovieDetails,
         addToFavorites, addToWatchLater, removeFavorites, removeWatchLater
 }) => {
     const hasFavoriteButton         = visibleButtons.some((str) => str === 'fav');
@@ -23,10 +24,10 @@ const ListComponent = (
             <div className="list__item" key={index}>
                 <div className="list__item-poster">
                     {item['poster_path'] ?
-                        <img src={`https://image.tmdb.org/t/p/original${item['poster_path']}`}/>
-                    : <img src='./img/placeholder.png'/>}
+                        <a href="#" onClick={() => showMovieDetails(item.id)}><img src={`https://image.tmdb.org/t/p/original${item['poster_path']}`}/></a>
+                        : <a href="#" onClick={() => showMovieDetails(item.id)}><img src='./img/placeholder.png'/></a>}
                 </div>
-                <div className='list__item-text'>{item['title']}</div>
+                <div className='list__item-text'><a href="#" onClick={() => showMovieDetails(item.id)}>{item['title']}</a></div>
                 <div className='list__item-actions'>
                     {hasFavoriteButton &&
                         <div

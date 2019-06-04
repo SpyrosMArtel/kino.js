@@ -3,7 +3,7 @@ import SearchIcon from '@material-ui/icons/SearchSharp';
 import HeartIcon from '@material-ui/icons/FavoriteOutlined';
 import WatchIcon from '@material-ui/icons/WatchLaterOutlined';
 import ArrowBackIcon from '@material-ui/icons/ArrowBackOutlined';
-import MovieIcon from '@material-ui/icons/MovieFilterOutlined';
+import HomeIcon from '@material-ui/icons/HomeOutlined';
 
 
 const SearchComponent = ( { onSubmit, onChange, routeChange, routeHasChanged, path} ) => {
@@ -11,7 +11,7 @@ const SearchComponent = ( { onSubmit, onChange, routeChange, routeHasChanged, pa
         return routeChanged ? (
             <React.Fragment>
                 <ArrowBackIcon className="search__mobile" onClick={()=>routeChange('/')}/>
-                <MovieIcon className="search__tabletplus" onClick={()=>routeChange('/')}/>
+                <HomeIcon className="search__tabletplus" onClick={()=>routeChange('/')}/>
             </React.Fragment>
         ) :
             (<form className="search__form" onSubmit={(e) => onSubmit(e) }>

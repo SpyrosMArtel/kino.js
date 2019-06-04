@@ -57,10 +57,39 @@ html, body {
 }
 
 body {
-  background: $background;
   color:$text-color;
   display: flex;
   justify-content: center;
+  @include respond-to("tablets") {
+    background: url("../img/1*1ZEwpn2AI5MkxuikOacIwg.jpeg") #f0f1ee no-repeat center;
+    background-size: cover;
+    &::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: -1;
+    }
+  }
+  @include respond-to("laptops_plus") {
+    background: url("../img/1*1ZEwpn2AI5MkxuikOacIwg.jpeg") #f0f1ee no-repeat center;
+    background-size: cover;
+    &::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: -1;
+    }
+  }
 }
 a {
   color:$other-items;
@@ -104,7 +133,7 @@ h6 {
   flex-flow: column;
   display: flex;
   height: 100%;
-  background: rgba($background_simple, 0.7);
+  //background: rgba($background_simple, 0.7);
   overflow: auto;
   width: 100%;
   padding: 8px;
@@ -127,4 +156,10 @@ h6 {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  @include respond-to("tablets") {
+    color: whitesmoke;
+  }
+  @include respond-to("laptops_plus") {
+    color: whitesmoke;
+  }
 }

@@ -17,7 +17,7 @@ class API {
     }
 
     getVideos(id, config) {
-        return axios.get(`${this.url}/movie/${id}/videos`, Object.assign({ params: {api_key: this.apiKey}, config }));
+        return axios.get(`${this.url}/movie/${id}`, Object.assign({ params: {api_key: this.apiKey, append_to_response: "videos,images"}, config }));
     }
 }
 

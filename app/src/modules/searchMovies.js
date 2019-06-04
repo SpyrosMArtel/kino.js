@@ -59,6 +59,7 @@ export default function reducer(state = initialState, action = {}) {
                 search_keywords: action.value,
                 movies: [...movies, ...action.results.movies],
                 totalPages: action.results.totalPages,
+                totalResults: action.results.totalResults,
                 page: action.results.page,
                 fetching: false,
                 error: { on : false, message: "" }

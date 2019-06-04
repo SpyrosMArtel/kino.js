@@ -168,14 +168,10 @@ class HomeContainer extends React.Component {
                         <Route exact path="/favorites" render={() =>
                             <FavoriteContainer
                                 listItems={ this.props.favoritesList }
-                                loadMore={ this.loadMore }
-                                hasMore={ this.hasMore }
                             /> } />
                         <Route exact path="/watchlater" render={() =>
                             <WatchlaterContainer
                                 listItems={ this.props.watchLaterList }
-                                loadMore={ this.loadMore }
-                                hasMore={ this.hasMore }
                             />}
                         />
                         <Route exact path="/" render={() => this.props.listItems.length > 0 ?
@@ -189,6 +185,7 @@ class HomeContainer extends React.Component {
                                 removeFavorites={ this.removeFromFavorites }
                                 removeWatchLater={ this.removeFromWatchLater }
                                 showMovieDetails={ this.showMovieDetails }
+                                isScroller={true}
                                 />
                             :
                             (<div className="home__empty"><h1>kino.js</h1></div>)

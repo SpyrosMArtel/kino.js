@@ -4,6 +4,7 @@ import {selectAllFavorites, removeFromFavorites } from "../../modules/addToList"
 import ListComponent from '../../component/list/list';
 import MovieDetails from '../../component/movieDetails/movieDetails';
 import {getMovieDetails, selectMovieDetails, toggleFavorite, toggleWatchLater} from "../../modules/searchMovies";
+import PropTypes from 'prop-types';
 
 class FavoritesContainer extends React.Component {
 
@@ -76,10 +77,9 @@ class FavoritesContainer extends React.Component {
                     <ListComponent
                         items={this.props.listItems}
                         visibleButtons={ this.visibleButtons }
-                        loadMore={ this.props.loadMore }
-                        hasMore={ this.props.hasMore }
                         removeFavorites={ this.removeFromFavorites }
                         showMovieDetails={ this.showMovieDetails }
+                        isScroller={false}
                     /> : <div className="favorites__empty">
                         <img src="img/heart-icons-set-erisbarkova-sketch.png" style={{width:'auto'}}/>
                         <p>Oh Snap! You have no favorites!</p>
@@ -110,3 +110,7 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(FavoritesContainer);
+
+FavoritesContainer.propTypes = {
+    listItems: PropTypes.array,
+};

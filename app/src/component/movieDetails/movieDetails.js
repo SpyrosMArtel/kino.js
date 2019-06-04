@@ -2,6 +2,7 @@ import React from 'react';
 import HeartIcon from '@material-ui/icons/FavoriteOutlined';
 import WatchIcon from '@material-ui/icons/WatchLaterOutlined';
 import CloseIcon from '@material-ui/icons/CloseOutlined';
+import PropTypes from 'prop-types';
 
 const MovieDetails = (
     {
@@ -86,3 +87,21 @@ const MovieDetails = (
     );
 };
 export default MovieDetails;
+
+MovieDetails.propTypes = {
+    item: PropTypes.object,
+    overview: PropTypes.string,
+    mediaUrl: PropTypes.string,
+    mediaType: PropTypes.string,
+    status: PropTypes.string,
+    title: PropTypes.string,
+    runtime: PropTypes.string,
+    homepage: PropTypes.string,
+    releaseDate: PropTypes.string,
+    originalTitle: PropTypes.string,
+    originalLanguage: PropTypes.string,
+    voteAverage: PropTypes.number,
+    addToFavorites: PropTypes.func,
+    addToWatchLater: PropTypes.func,
+    close: PropTypes.func,
+};

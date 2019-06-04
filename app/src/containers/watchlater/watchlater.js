@@ -7,6 +7,7 @@ import {
 import ListComponent from '../../component/list/list';
 import MovieDetails from '../../component/movieDetails/movieDetails';
 import {getMovieDetails, selectMovieDetails, toggleWatchLater} from "../../modules/searchMovies";
+import PropTypes from 'prop-types';
 
 class WatchlaterContainer extends React.Component {
 
@@ -79,10 +80,9 @@ class WatchlaterContainer extends React.Component {
                     <ListComponent
                         items={this.props.listItems}
                         visibleButtons={ this.visibleButtons }
-                        loadMore={ this.loadMore }
-                        hasMore={ this.hasMore }
                         removeWatchLater={ this.removeFromWatchLater }
                         showMovieDetails={ this.showMovieDetails }
+                        isScroller={false}
                     /> : <div className="watchlater__empty">
                             <img src="img/hugo-waiting.png"/>
                             <p>Oh Snap! You have nothing to watch later!</p>
@@ -113,3 +113,7 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(WatchlaterContainer);
+
+WatchlaterContainer.propTypes = {
+    listItems: PropTypes.array,
+};

@@ -4,6 +4,7 @@ import HeartIcon from '@material-ui/icons/FavoriteOutlined';
 import WatchIcon from '@material-ui/icons/WatchLaterOutlined';
 import ArrowBackIcon from '@material-ui/icons/ArrowBackOutlined';
 import HomeIcon from '@material-ui/icons/HomeOutlined';
+import PropTypes from 'prop-types';
 
 
 const SearchComponent = ( { onSubmit, onChange, routeChange, routeHasChanged, path} ) => {
@@ -35,3 +36,11 @@ const SearchComponent = ( { onSubmit, onChange, routeChange, routeHasChanged, pa
     );
 };
 export default SearchComponent;
+
+SearchComponent.propTypes = {
+    onSubmit: PropTypes.func,
+    onChange: PropTypes.func,
+    routeChange: PropTypes.func,
+    routeHasChanged: PropTypes.bool,
+    path: PropTypes.string
+};

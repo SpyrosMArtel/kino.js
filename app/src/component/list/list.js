@@ -3,11 +3,12 @@ import DeleteIcon from '@material-ui/icons/DeleteOutlined';
 import HeartIcon from '@material-ui/icons/FavoriteOutlined';
 import WatchIcon from '@material-ui/icons/WatchLaterOutlined';
 import InfiniteScroll from 'react-infinite-scroller';
-import {removeFromWatchLater} from "../../modules/addToList";
+import PropTypes from 'prop-types';
 
 const ListComponent = (
     {
         items,
+        isScroller,
         visibleButtons,
         loadMore,
         hasMore,
@@ -49,9 +50,9 @@ const ListComponent = (
             </div>
         );
     });
-
-    return (
-            <InfiniteScroll
+    const mainElement = (isScroller) => {
+        if (isScroller) {
+            return (<InfiniteScroll
                 pageStart={1}
                 loadMore={ loadMore }
                 hasMore={ hasMore }
@@ -59,8 +60,26 @@ const ListComponent = (
                 className="list"
                 useWindow={false}>
                 { listItems }
-            </InfiniteScroll>
+            </InfiniteScroll>);
+        }
+        return (<div className="list">{ listItems }</div>);
+    };
+    return (
+        mainElement(isScroller)
     );
 };
 
 export default ListComponent;
+
+ListComponent.propTypes = {
+    items: PropTypes.array,
+    isScroller: PropTypes.bool,
+    visibleButtons: PropTypes.array,
+    loadMore: PropTypes.func,
+    hasMore: PropTypes.bool,
+    showMovieDetails: PropTypes.func,
+    addToFavorites: PropTypes.func,
+    addToWatchLater: PropTypes.func,
+    removeFavorites: PropTypes.func,
+    removeWatchLater: PropTypes.func,
+};

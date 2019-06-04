@@ -23,31 +23,3 @@ export default function configureStore(initialState) {
         ),
     );
 }
-// history.listen(location => {
-//     if (lastLocation !== location.pathname) {
-//         lastLocation = location.pathname;
-//         store.dispatch(changeLocation(lastLocation));
-//     }
-// });
-//
-// const loggerMiddleware = createLogger({}); // initialize logger
-//
-// export default (history) => combineReducers({
-//     router: connectRouter(history),
-//     SearchMovies, AddToList
-// })
-//
-// const rest_api = new API( { url: 'https://api.themoviedb.org/3' } );
-// const createStoreWithMiddleware = applyMiddleware(
-//         thunk.withExtraArgument(rest_api),
-//         loggerMiddleware,
-//         routerMiddleware(history)
-//     )(createStore); // apply logger to redux
-//
-// const reducers = combineReducers({
-//     router: connectRouter(history),
-//     SearchMovies, AddToList
-// });
-//
-// const configureStore = (initialState) => createStoreWithMiddleware(connectRouter(history)(reducers), initialState);
-// export default configureStore;

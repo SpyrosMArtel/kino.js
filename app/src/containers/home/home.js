@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom'
 import { push, goBack } from 'connected-react-router'
-import FavoriteContainer from '../favorites/favorites';
-import WatchlaterContainer from '../watchlater/watchlater';
+import FavoriteContainer from '../../component/favorites/favorites';
+import WatchlaterContainer from '../../component/favorites/watchlater/watchlater';
 import SearchComponent from '../../component/search/search';
 import MovieDetails from '../../component/movieDetails/movieDetails';
 
@@ -29,7 +29,9 @@ class HomeContainer extends React.Component {
                 changed: false,
                 path: ''
             },
+            title: '',
             showDetails: false,
+            movieDetailsUpdate: false,
         };
 
         this.loadMore = this.loadMore.bind(this);
@@ -67,12 +69,25 @@ class HomeContainer extends React.Component {
         }
     }
 
+    resetMovieDetails(what) {
+        if (this.props.movieDetails) {
+            if (!this.props.movieDetails[what]) {
+                this.props.movieDetails[what] = true;
+            } else {
+                this.props.movieDetails[what] = false;
+            }
+            this.setState({movieDetailsUpdate: true});
+        }
+    }
+
     addToFavorites(movie) {
         let item = this.isInArrayById(movie.id, this.props.favoritesList);
         if (!item) {
             this.props.toggleFavorite(movie.id);
             this.props.addFavorite(movie);
         }
+        this.resetMovieDetails("favorite");
+
     }
 
     addToWatchLater(movie) {
@@ -81,6 +96,7 @@ class HomeContainer extends React.Component {
             this.props.toggleWatchLater(movie.id);
             this.props.addWatchLater(movie);
         }
+        this.resetMovieDetails("watchLater");
     }
 
     removeFromFavorites(id) {
@@ -89,6 +105,7 @@ class HomeContainer extends React.Component {
             this.props.toggleFavorite(id);
             this.props.removeFavorite(id);
         }
+        this.resetMovieDetails("favorite");
     }
 
     removeFromWatchLater(id) {
@@ -97,9 +114,10 @@ class HomeContainer extends React.Component {
             this.props.toggleWatchLater(id);
             this.props.removeWatchLater(id);
         }
+        this.resetMovieDetails("watchLater");
     }
 
-    routeChanged(newRoute) {
+    routeChanged(newRoute, title) {
         let path = newRoute.split('/')[1];
         if (newRoute !== '/') {
             this.props.changePage(newRoute);
@@ -110,7 +128,8 @@ class HomeContainer extends React.Component {
             route:{
                 changed: newRoute !== '/',
                 path: path,
-            }
+            },
+            title: title
         });
     }
 
@@ -121,7 +140,7 @@ class HomeContainer extends React.Component {
             });
             return;
         }
-        this.props.getDetails(id).then((results) => {
+        this.props.getDetails(id).then(() => {
             this.setState({
                 showDetails: true,
             });
@@ -151,7 +170,10 @@ class HomeContainer extends React.Component {
                 voteAverage={this.props.movieDetails.voteAverage}
                 addToFavorites={ this.addToFavorites }
                 addToWatchLater={ this.addToWatchLater }
+                removeFavorites={ this.removeFromFavorites }
+                removeWatchLater={ this.removeFromWatchLater }
                 close={ this.closeDetails }
+                update={ this.state.movieDetailsUpdate }
 
             />;
         return (
@@ -162,16 +184,21 @@ class HomeContainer extends React.Component {
                     routeChange={ this.routeChanged }
                     routeHasChanged={ this.state.route.changed }
                     path={this.state.route.path }
+                    title={this.state.title}
                 />
                 <main id='page-wrapper' role='main'>
                     <Switch>
                         <Route exact path="/favorites" render={() =>
                             <FavoriteContainer
                                 listItems={ this.props.favoritesList }
+                                removeFavorites={ this.removeFromFavorites }
+                                showMovieDetails={ this.showMovieDetails }
                             /> } />
                         <Route exact path="/watchlater" render={() =>
                             <WatchlaterContainer
                                 listItems={ this.props.watchLaterList }
+                                removeWatchLater={ this.removeFromWatchLater }
+                                showMovieDetails={ this.showMovieDetails }
                             />}
                         />
                         <Route exact path="/" render={() => this.props.listItems.length > 0 ?

@@ -128,9 +128,15 @@
       }
       & .movie-details__actions-fav {
         margin: auto 0;
+        &.active a {
+          color:red;
+        }
       }
       & .movie-details__actions-later {
         margin: auto 0;
+        &.active a {
+          color:red;
+        }
       }
     }
   }

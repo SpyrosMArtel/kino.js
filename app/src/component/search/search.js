@@ -7,12 +7,13 @@ import HomeIcon from '@material-ui/icons/HomeOutlined';
 import PropTypes from 'prop-types';
 
 
-const SearchComponent = ( { onSubmit, onChange, routeChange, routeHasChanged, path} ) => {
+const SearchComponent = ( { onSubmit, onChange, routeChange, routeHasChanged, path, title} ) => {
     function backButtonOrSearch(routeChanged) {
         return routeChanged ? (
             <React.Fragment>
-                <ArrowBackIcon className="search__mobile" onClick={()=>routeChange('/')}/>
-                <HomeIcon className="search__tabletplus" onClick={()=>routeChange('/')}/>
+                <ArrowBackIcon className="search__mobile" onClick={()=>routeChange('/', '')}/>
+                <HomeIcon className="search__tabletplus" onClick={()=>routeChange('/', '')}/>
+                <h5>{title}</h5>
             </React.Fragment>
         ) :
             (<form className="search__form" onSubmit={(e) => onSubmit(e) }>
@@ -28,8 +29,8 @@ const SearchComponent = ( { onSubmit, onChange, routeChange, routeHasChanged, pa
                 { backButtonOrSearch(routeHasChanged) }
             </div>
             <div className={`navbar-menu ${path}`}>
-                <div className="navbar-menu__favorites"><HeartIcon onClick={() => path === '' && routeChange('/favorites')}/></div>
-                <div className="navbar-menu__watchlater"><WatchIcon  onClick={()=> path === '' && routeChange('/watchlater')}/></div>
+                <div className="navbar-menu__favorites"><HeartIcon onClick={() => path === '' && routeChange('/favorites', 'Favorites')}/></div>
+                <div className="navbar-menu__watchlater"><WatchIcon  onClick={()=> path === '' && routeChange('/watchlater', 'Watch Later')}/></div>
             </div>
             <div/>
         </nav>

@@ -20,6 +20,8 @@ const MovieDetails = (
         voteAverage,
         addToFavorites,
         addToWatchLater,
+        removeFavorites,
+        removeWatchLater,
         close
     }
 ) => {
@@ -60,8 +62,10 @@ const MovieDetails = (
                 {mediaElement(mediaType.toLowerCase())}
                 <div className='movie-details__group'>
                     <div className='movie-details__actions'>
-                        <div className='movie-details__actions-fav'><a href="#" onClick={() => addToFavorites(item)}><HeartIcon fontSize="inherit"/></a></div>
-                        <div className='movie-details__actions-later'><a href="#" onClick={() => addToWatchLater(item)}><WatchIcon fontSize="inherit"/></a></div>
+                        <div className={item.favorite ? 'movie-details__actions-fav active' : 'movie-details__actions-fav'}>
+                            <a href="#" onClick={() => { item.favorite ? removeFavorites(item.id) : addToFavorites(item)}}><HeartIcon fontSize="inherit"/></a></div>
+                        <div className={item.watchLater ? 'movie-details__actions-later active' : 'movie-details__actions-later'}>
+                            <a href="#" onClick={() => { item.watchLater ? removeWatchLater(item.id) : addToWatchLater(item)}}><WatchIcon fontSize="inherit"/></a></div>
                     </div>
                     {voteAverage && <React.Fragment><b>Rate&nbsp;</b><progress max={10} value={voteAverage}/></React.Fragment>}
                 </div>
@@ -95,7 +99,7 @@ MovieDetails.propTypes = {
     mediaType: PropTypes.string,
     status: PropTypes.string,
     title: PropTypes.string,
-    runtime: PropTypes.string,
+    runtime: PropTypes.number,
     homepage: PropTypes.string,
     releaseDate: PropTypes.string,
     originalTitle: PropTypes.string,
@@ -104,4 +108,5 @@ MovieDetails.propTypes = {
     addToFavorites: PropTypes.func,
     addToWatchLater: PropTypes.func,
     close: PropTypes.func,
+    update: PropTypes.bool, // used mostly for re-rendering the component
 };

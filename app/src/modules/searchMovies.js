@@ -130,8 +130,11 @@ export function getMovieDetails(id) {
             results.originalTitle = response.data.original_title || undefined;
             results.originalLanguage = response.data.original_language || undefined;
             results.voteAverage = response.data.vote_average || undefined;
+            let movie = getState().SearchMovies.movies.find((item) => item.id === results.id);
+            results.favorite = movie.favorite;
+            results.watchLater = movie.watchLater;
             dispatch(setMovieDetails(results));
-            resolve(results);
+            resolve();
         }).catch((err) => {
             if (err.response) {
                 //dispatch(error(err.response.data));

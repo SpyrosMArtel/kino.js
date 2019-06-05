@@ -138,7 +138,7 @@ export function getMovieDetails(id) {
         }).catch((err) => {
             if (err.response) {
                 //dispatch(error(err.response.data));
-                reject(error.response.data);
+                reject(err.response.data);
             } else if (err.request) {
                 //dispatch(error("The server is not responding... Please try again later."));
                 reject(err.request);

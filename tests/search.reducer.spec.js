@@ -8,17 +8,17 @@ import {mockAPI} from './fakeAPI';
 const mockStore = configureMockStore([thunk.withExtraArgument(mockAPI)]);
 
 const initialState = {
-    search_keywords: "",
-    fetching: false,
-    movies: [],
-    totalPages: 0,
-    page: 1,
-    totalResults: 0,
-    error: {
-        on: false,
-        message: ""
-    },
-    movieDetails: {},
+        search_keywords: "",
+        fetching: false,
+        movies: [],
+        totalPages: 0,
+        page: 1,
+        totalResults: 0,
+        error: {
+            on: false,
+            message: ""
+        },
+        movieDetails: {},
 };
 
 describe('It will test the initial state and the FETCH and SEARCH actions', () => {
@@ -148,6 +148,72 @@ describe('It will test the initial state and the FETCH and SEARCH actions', () =
     });
 
     it('getMovieDetails() action creator', () => {
+        store = mockStore({
+            SearchMovies: {
+                search_keywords: "",
+                fetching: false,
+                movies: [
+                    {
+                        "image": "/zHJFdhqEXZJxG653oZvOM3PmNON.jpg",
+                        "adult": false,
+                        "overview": "It sounded like just another urban legend: A videotape filled with nightmarish images, leading to a phone call foretelling the viewer's death in exactly seven days. As a newspaper reporter, Rachel Keller was naturally skeptical of the story, until four teenagers all met with mysterious deaths exactly one week after watching just such a tape. Allowing her investigative curiosity to get the better of her, Rachel tracks down the video... and watches it. Now she has just seven days to unravel the mystery of the Ring.",
+                        "releaseDate": "2002-10-18",
+                        "id": 565,
+                        "originalTitle": "The Ring",
+                        "originalLanguage": "en",
+                        "title": "The Ring",
+                        "backdrop_path": "/yeKT2gNFxHGbTT3Htj5PE9IerGJ.jpg",
+                        "popularity": 1.136598,
+                        "vote_count": 4,
+                        "video": false,
+                        "voteAverage": 6.5,
+                        "favorite": true,
+                        "watchLater": false,
+                    }
+                ],
+                totalPages: 0,
+                page: 1,
+                totalResults: 0,
+                error: {
+                    on: false,
+                    message: ""
+                },
+                movieDetails: {},
+            }
+        });
+        SearchMovies({
+            SearchMovies: {
+                search_keywords: "",
+                fetching: false,
+                movies: [
+                    {
+                        "image": "/zHJFdhqEXZJxG653oZvOM3PmNON.jpg",
+                        "adult": false,
+                        "overview": "It sounded like just another urban legend: A videotape filled with nightmarish images, leading to a phone call foretelling the viewer's death in exactly seven days. As a newspaper reporter, Rachel Keller was naturally skeptical of the story, until four teenagers all met with mysterious deaths exactly one week after watching just such a tape. Allowing her investigative curiosity to get the better of her, Rachel tracks down the video... and watches it. Now she has just seven days to unravel the mystery of the Ring.",
+                        "releaseDate": "2002-10-18",
+                        "id": 565,
+                        "originalTitle": "The Ring",
+                        "originalLanguage": "en",
+                        "title": "The Ring",
+                        "backdrop_path": "/yeKT2gNFxHGbTT3Htj5PE9IerGJ.jpg",
+                        "popularity": 1.136598,
+                        "vote_count": 4,
+                        "video": false,
+                        "voteAverage": 6.5,
+                        "favorite": true,
+                        "watchLater": false,
+                    }
+                ],
+                totalPages: 0,
+                page: 1,
+                totalResults: 0,
+                error: {
+                    on: false,
+                    message: ""
+                },
+                movieDetails: {},
+            }
+        });
         const expectedActions = [
             {type: FETCHING, 'value': true},
             {
@@ -621,12 +687,14 @@ describe('It will test the initial state and the FETCH and SEARCH actions', () =
                                 "width": 718
                             }
                         ]
-                    }
+                    },
+                    "favorite": true,
+                    "watchLater": false,
                 }
             }
         ];
         return store.dispatch(getMovieDetails(565)).then(() => {
-            expect(store.getActions()).toEqual(expectedActions)
+            expect(store.getActions()).toEqual(expectedActions);
         });
     });
 });

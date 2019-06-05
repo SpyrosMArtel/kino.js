@@ -141,10 +141,10 @@ export function getMovieDetails(id) {
                 reject(error.response.data);
             } else if (err.request) {
                 //dispatch(error("The server is not responding... Please try again later."));
-                reject(error.request);
+                reject(err.request);
             } else {
                 //dispatch(error("Something went wrong... Please try again later."));
-                reject(error.message);
+                reject(err.message);
             }
         });
     });

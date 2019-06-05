@@ -41,4 +41,5 @@ gulp.task('watch', ['build'], function () {
     gulp.watch('./app/assets/stylesheets/**/*.scss', ['styles']);
 });
 
+gulp.task('compile', ['build', 'images', 'svg', 'styles', 'copy_index']);
 gulp.task('default', ['images', 'svg', 'styles', 'copy_index', 'watch']);

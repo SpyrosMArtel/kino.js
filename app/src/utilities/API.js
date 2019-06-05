@@ -4,7 +4,7 @@ class API {
     constructor({ url }){
         this.url = url;
         this.endpoints = {};
-        this.apiKey = '540700bd5f61016b697371b5145631b9';
+        this.apiKey = ''; //put your own key here
     }
 
     findMovie(keyword, page, config={}) {

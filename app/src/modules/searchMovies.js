@@ -100,13 +100,13 @@ export function fetchMovies(keyword, page) {
         }).catch((err) => {
             if (err.response) {
                 //dispatch(error(err.response.data));
-                console.log(error.response.data);
+                reject(err.response.data);
             } else if (err.request) {
                 //dispatch(error("The server is not responding... Please try again later."));
-                console.log(error.request);
+                reject(err.response.data);
             } else {
                 //dispatch(error("Something went wrong... Please try again later."));
-                console.log('Error', error.message);
+                reject(err.response.data);
             }
         });
     }

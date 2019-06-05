@@ -20,4 +20,7 @@ python3 -m http.server 9000 --bind localhost
 ```
 The last step can be ommited, in such case navigate to the public folder open the index.html in your browser of choise.
 
+### Tests
+Run `npm test`
+
 Have fun, keep coding!
